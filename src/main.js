@@ -4,13 +4,18 @@ import router from './router'
 import './plugins/vuetify';
 import VueRamda from 'vue-ramda'
 
-import axios from 'axios'
+import axios from 'axios';
+import vuetify from './plugins/vuetify';
+import 'roboto-fontface/css/roboto/roboto-fontface.css';
+import '@fortawesome/fontawesome-free/css/all.css';
+
 
 Vue.config.productionTip = false
 
 var vue =new Vue({
-  router,
-  render: h => h(App)
+    router,
+    vuetify,
+    render: h => h(App)
 }).$mount('#app')
 
 Vue.use(VueRamda)

@@ -7,9 +7,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/:graphid',
       name: 'home',
-      component: Home
+      component: Home,
+      props: route => ({graphid: route.params.graphid}),
     },
     // {
     //   path: '/about',

@@ -4,7 +4,7 @@ const SERVER_HOST = "http://192.168.1.140:3000/";
 const PFUNC_API = SERVER_HOST + "pfunction/";
 const PCLASS_API = (id) => SERVER_HOST + `pclass?filter={"where":{"_id":"${id}"}}`;
 const PCLASSI_API = (pclassid) => SERVER_HOST +  `pclassi?filter={"where":{"pclassid":"${pclassid}","pclassi.chain_id":"3"}}`; // ${soMany}
-
+const GRAPH_API = SERVER_HOST + "graph/";
 
 export const getData = async (graphObj) => {
   let pfunctions = [];
@@ -23,3 +23,10 @@ export const getData = async (graphObj) => {
   }
   return pfunctions;
 }
+
+export const getGraph = async (graphid) => {
+  const graph = (await axios.get(`${GRAPH_API}${graphid}`)).data;
+  graph.json = JSON.parse(graph.json);
+  const pfunctions = await getData(graph.json);
+  return {graph, pfunctions};
+};
