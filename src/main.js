@@ -1,18 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
+import './plugins/vuetify';
 import VueRamda from 'vue-ramda'
 
 import axios from 'axios'
 
-
-
 Vue.config.productionTip = false
-
-
-
-
 
 var vue =new Vue({
   router,
@@ -23,7 +17,7 @@ Vue.use(VueRamda)
 
 let graph1 = [{"n":{"0":{"i":0,"id":"5c95397d4212cc40afeec91f"},"1":{"i":1,"id":"5c95397d4212cc40afeec922"},"2003":{"i":2003,"id":"5bc59e192817116e84bdd831"}},"e":[[2003,1,"1",1],[2003,1,0,1]]}]
 
-console.log(graph1)
+console.log('graph1', graph1)
 
 console.log(vue.$R.add(1, 2))
 
@@ -42,7 +36,7 @@ const ports = [
   {
       _id: '5bc59e192817116e84bdd830',
       pclassid: '5bc59d5d2817116e84bdd82e',
-      
+
       pclass: { name: 'PipeOS' },
       pfunction: {
           gapi: {
@@ -64,7 +58,7 @@ const ports = [
       },
       timestamp: '2018-10-16T08:10:33.614Z',
   },
-  {         
+  {
       _id: '5bc59e192817116e84bdd831',
       pclassid: '5bc59d5d2817116e84bdd82e',
       pclass: { name: 'PipeOS' },
@@ -226,7 +220,7 @@ function find2(idVal, obj3) {
 
   for ( var ndx in obj3){
     if (obj3[ndx]._id == idVal) {
-      console.log(obj3[ndx])
+      console.log('find2 obj3[ndx]', obj3[ndx])
       var t = obj3[ndx]
       return t;
     }
@@ -235,8 +229,8 @@ function find2(idVal, obj3) {
 }
 
 function serverData1(){
-  console.log(graph1[0].n)
-  
+  console.log('graph1[0].n', graph1[0].n)
+
   vue.$R.mapObjIndexed((x, key, all) => {
     var found = find2(x.id, ports)
     if (found !== false) {
@@ -245,17 +239,18 @@ function serverData1(){
       serverData2(key, found.pclassid, found.pfunction.chainids[0])
     } else {
       axios.get(serv1+x.id).then((response) => {
-        console.log(response.data)
+        // get pfunction
+        console.log('serverData1 response.data', response.data)
         nodes[key] = response.data
         nodesI[parseInt(key)] = x.id
         serverData2(key, response.data.pclassid, response.data.pfunction.chainids[0])
-  
+
       })
     }
-    
+
   }, graph1[0].n)
 
-  console.log(nodes)
+  console.log('nodes', nodes)
 }
 
 function serverData2(key, pclass, chain){
@@ -264,8 +259,9 @@ function serverData2(key, pclass, chain){
       nodes[key].i = found
       //nodesI[parseInt(key)] = pclass
     } else {
+      // get pclassi
       axios.get(serv0+`pclassi?filter={"where":{"pclassid":"${pclass}","pclassi.chain_id":"${chain}"}}` ).then((response) => {
-        console.log(response.data)
+        console.log('serverData2 response.data', response.data)
         nodes[key].i = response.data[0]
         //nodesI[parseInt(key)] = x.id
 
@@ -273,6 +269,4 @@ function serverData2(key, pclass, chain){
     }
 }
 
-serverData1()
-
-
+// serverData1()
