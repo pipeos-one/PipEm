@@ -68,9 +68,9 @@ import {ethers} from 'ethers';
 import PipeGraphs from '@pipeos/pipecanvas';
 import {AbiFunction, DeploymentInfo} from 'vue-ethabi';
 import VueQrcode from '@chenfengyuan/vue-qrcode';
-import MarkdownView from './MarkdownView.vue';
+import MarkdownView from '../components/MarkdownView.vue';
 import {getGraph} from '../script.js';
-import {getAliasesFromMd} from './markdown-utils.js';
+import {getAliasesFromMd} from '../components/markdown-utils.js';
 
 Vue.component(VueQrcode.name, VueQrcode);
 
