@@ -69,7 +69,7 @@ import PipeGraphs from '@pipeos/pipecanvas';
 import {AbiFunction, DeploymentInfo} from 'vue-ethabi';
 import VueQrcode from '@chenfengyuan/vue-qrcode';
 import MarkdownView from '../components/MarkdownView.vue';
-import {getGraph} from '../script.js';
+import {getGraph, getProvider} from '../utils.js';
 import {getAliasesFromMd} from '../components/markdown-utils.js';
 
 Vue.component(VueQrcode.name, VueQrcode);
@@ -91,7 +91,9 @@ export default {
     DeploymentInfo,
   },
   data() {
-    return{
+    return {
+      provider: null,
+      wallet: null,
       graph: null,
       canvasid: 'pipecanvas_graph',
       canvasid2: 'pipecanvas_graph2',
@@ -108,6 +110,10 @@ export default {
   async mounted() {
     window.ethers = ethers;
     window.axios = axios;
+
+    const {provider, wallet} = await getProvider();
+    this.provider = provider;
+    this.wallet = wallet;
 
     window.PipedScriptCallback = this.PipedScriptCallback;
     this.graphid && this.setData();
@@ -131,7 +137,7 @@ export default {
     async setData() {
       this.qrcodeValue = window.location.origin + "/#/" + this.graphid;
 
-      const {graph, pfunctions} = await getGraph(this.graphid);
+      const {graph, pfunctions} = await getGraph(this.graphid, this.provider.network.chainId);
       this.graph = graph;
       this.markdownText = graph.markdown;
       this.pfunctions = pfunctions;
