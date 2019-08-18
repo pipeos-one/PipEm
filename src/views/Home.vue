@@ -148,6 +148,10 @@ export default {
     },
     onChange(args) {
       args.forEach((arg) => {
+        if (!arg.type.includes('int') && arg.type !== 'bool') {
+          arg.value = `"${arg.value}"`;
+        }
+
         const toBeReplaced = `let ${arg.name} = null;`;
         const toReplace = `let ${arg.name} = ${arg.value};`;
         this.jssource = this.jssource.replace(toBeReplaced, toReplace);
@@ -289,6 +293,10 @@ textarea {
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: default;
+}
+
+.abifunc .v-input__control .v-input__slot .v-text-field__slot .v-label {
+  top:0;
 }
 
 </style>
