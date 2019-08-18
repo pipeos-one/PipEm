@@ -74,13 +74,6 @@ import {getAliasesFromMd} from '../components/markdown-utils.js';
 
 Vue.component(VueQrcode.name, VueQrcode);
 
-
-// const vendor_graph = [{"n":{"0":{"i":0,"id":"5c95397d4212cc40afeec91f"}},"e":[]}]
-// const market_graph = [{"n":{"0":{"i":0,"id":"5c95397d4212cc40afeec91f"},"1":{"i":1,"id":"5c95397d4212cc40afeec922"},"2":{"i":2,"id":"5c95397d4212cc40afeec919"}},"e":[]}]
-// const market_graph2 = [{"n":{"0":{"i":0,"id":"5c95397d4212cc40afeec91f"},"1":{"i":1,"id":"5c95397d4212cc40afeec922"},"2":{"i":2,"id":"5c95397d4212cc40afeec919"},"2001":{"i":2001,"id":"5bc59e192817116e84bdd831"}},"e":[[0,1,1,2],[0,1,2,1],[1,1,2,4],[2001,1,"0",1],[2001,1,1,1],[2001,1,2,3]]}]
-// const market_graph_full = [{"n":{"0":{"i":0,"id":"5c95397d4212cc40afeec91f"},"1":{"i":1,"id":"5c95397d4212cc40afeec922"},"2":{"i":2,"id":"5c95397d4212cc40afeec919"},"2001":{"i":2001,"id":"5bc59e192817116e84bdd831"},"2003":{"i":2003,"id":"5bc59e192817116e84bdd831"}},"e":[[0,1,1,2],[0,1,2,1],[1,1,2,4],[2001,1,"0",1],[2001,1,1,1],[2001,1,2,3],[2003,1,"2",5],[2003,1,1,3]]}]
-
-
 export default {
   name: 'home',
   props: ['graphid'],
@@ -235,6 +228,7 @@ export default {
 #app, html, body, .v-tabs-items, .v-window__container {
   height: 100%!important;
   width: 100%;
+  background: #fff;
 }
 
 .fixed {
