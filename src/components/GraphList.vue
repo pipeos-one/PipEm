@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout row wrap>
     <v-flex xs2>
       <v-dialog
       v-model="addGraphDialog"

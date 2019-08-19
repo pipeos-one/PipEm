@@ -78,7 +78,10 @@ import {
   getProvider,
   getCachedGraphs,
   getCachedGraph,
-  getCachedGraphIds,
+  addCacheGraphId,
+  removeCacheGraphId,
+  addCachedGraph,
+  removeCachedGraph,
 } from '../utils.js';
 import {getAliasesFromMd} from '../components/markdown-utils.js';
 import PIPEM from '../namespace';
@@ -157,11 +160,9 @@ export default {
 
       if (!this.graph || !this.pfunctions) {
         const {graph, pfunctions} = await getGraph(this.graphid, this.provider.network.chainId);
-        this.localStorage.setItem(`${PIPEM.cache}${this.graphid}`, JSON.stringify({graph, pfunctions}));
 
-        const graphIds = getCachedGraphIds();
-        graphIds.push(this.graphid);
-        this.localStorage.setItem(PIPEM.cache, JSON.stringify(graphIds));
+        addCachedGraph(this.graphid, {graph, pfunctions});
+        addCacheGraphId(this.graphid);
 
         this.graph = graph;
         this.pfunctions = pfunctions;
@@ -248,14 +249,8 @@ export default {
     onRemoveGraph(graphid) {
       const graphIndex = this.graphs.findIndex((graph) => graph.graph._id === graphid);
       this.graphs.splice(graphIndex, 1);
-      this.localStorage.removeItem(`${PIPEM.cache}${graphid}`);
-      const graphIds = getCachedGraphIds();
-      const index = graphIds.indexOf(graphid);
-
-      if (index > -1) {
-        graphIds.splice(index, 1);
-        this.localStorage.setItem(PIPEM.cache, JSON.stringify([graphIds]));
-      }
+      removeCachedGraph(graphid);
+      removeCacheGraphId(graphid);
     }
   }
 }

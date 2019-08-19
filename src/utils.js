@@ -42,7 +42,7 @@ export const getCachedGraphIds = () => {
 
   try {
     const graphIds = JSON.parse(cachedIds);
-    return graphIds;
+    return graphIds || [];
   } catch(e) {
     console.error(`Could not retrieve graphs IDS from localStorage. ${e}`);
   }
@@ -78,4 +78,32 @@ export const getCachedGraph = (graphid) => {
     }
   }
   return {};
+}
+
+export const setCacheGraphIds = (graphIds) => {
+  window.localStorage.setItem(PIPEM.cache, JSON.stringify(graphIds));
+}
+
+export const addCacheGraphId = (graphid) => {
+  const graphIds = getCachedGraphIds();
+  graphIds.push(graphid);
+  setCacheGraphIds(graphIds);
+}
+
+export const removeCacheGraphId = (graphid) => {
+  const graphIds = getCachedGraphIds();
+  const index = graphIds.indexOf(graphid);
+
+  if (index > -1) {
+    graphIds.splice(index, 1);
+    setCacheGraphIds(graphIds);
+  }
+}
+
+export const addCachedGraph = (graphid, graphData) => {
+  window.localStorage.setItem(`${PIPEM.cache}${graphid}`, JSON.stringify(graphData));
+}
+
+export const removeCachedGraph = (graphid) => {
+  window.localStorage.removeItem(`${PIPEM.cache}${graphid}`);
 }
