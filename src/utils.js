@@ -39,7 +39,7 @@ export const getProvider = async () => {
 
 export const getCachedGraphIds = () => {
   const cachedIds = window.localStorage.getItem(PIPEM.cache);
-  console.log('cachedIds', cachedIds);
+
   try {
     const graphIds = JSON.parse(cachedIds);
     return graphIds;
@@ -53,7 +53,6 @@ export const getCachedGraphs = () => {
   let graphs = [];
 
   const graphIds = getCachedGraphIds();
-  console.log('graphIds', graphIds);
 
   graphIds.forEach((id) => {
     const cachedGraph = window.localStorage.getItem(`${PIPEM.cache}${id}`);

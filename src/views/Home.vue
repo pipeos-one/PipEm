@@ -134,7 +134,7 @@ export default {
       this.graphid && this.setData();
     },
     tabIndex() {
-      if (this.tabIndex === 2) {
+      if (this.tabIndex === 'tab-3') {
         setTimeout(() => {
           document.getElementById(this.canvasid2).innerHTML = '';
           const pipegraph = new PipeGraphs(this.pfunctions, {}, ['graphRender']);
