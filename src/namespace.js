@@ -9,6 +9,7 @@ const PIPEM = {
       graph: `${pipeserver}/graph`,
     }
   },
+  cache: 'pipem_',
 }
 
 export default PIPEM;

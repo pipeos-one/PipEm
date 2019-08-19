@@ -36,3 +36,47 @@ export const getProvider = async () => {
 
   return {provider, wallet};
 };
+
+export const getCachedGraphIds = () => {
+  const cachedIds = window.localStorage.getItem(PIPEM.cache);
+  console.log('cachedIds', cachedIds);
+  try {
+    const graphIds = JSON.parse(cachedIds);
+    return graphIds;
+  } catch(e) {
+    console.error(`Could not retrieve graphs IDS from localStorage. ${e}`);
+  }
+  return [];
+}
+
+export const getCachedGraphs = () => {
+  let graphs = [];
+
+  const graphIds = getCachedGraphIds();
+  console.log('graphIds', graphIds);
+
+  graphIds.forEach((id) => {
+    const cachedGraph = window.localStorage.getItem(`${PIPEM.cache}${id}`);
+    try {
+      const graphObj = JSON.parse(cachedGraph);
+      graphs.push(graphObj);
+    } catch(e) {
+      console.error(`Could not retrieve graph ID ${id} from localStorage. ${e}`);
+    }
+  });
+
+  return graphs;
+}
+
+export const getCachedGraph = (graphid) => {
+  const cachedGraph = localStorage.getItem(`${PIPEM.cache}${graphid}`);
+  if (cachedGraph) {
+    try {
+      const graphData = JSON.parse(cachedGraph);
+      return graphData;
+    } catch(e) {
+      console.error(`Could not parse localStorage. ID: ${graphid}. Data: ${cachedGraph}`);
+    }
+  }
+  return {};
+}

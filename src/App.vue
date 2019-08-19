@@ -5,6 +5,19 @@
 </template>
 
 <style>
+.fullheight {
+  height: 100%;
+  width: 100%;
+  margin-right: 0!important;
+  margin-left: 0!important;
+}
+
+#app, html, body, .v-tabs-items, .v-window__container {
+  height: 100%!important;
+  width: 100%;
+  background: #fff;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
