@@ -49,35 +49,30 @@ export const getCachedGraphIds = () => {
   return [];
 }
 
+export const getCachedGraph = (graphid) => {
+  const cachedGraph = window.localStorage.getItem(`${PIPEM.cache}${graphid}`);
+  try {
+    const graphObj = JSON.parse(cachedGraph);
+    return graphObj;
+  } catch(e) {
+    console.error(`Could not parse localStorage. ID: ${graphid}. Data: ${cachedGraph}. ${e}`);
+  }
+  return null;
+}
+
 export const getCachedGraphs = () => {
   let graphs = [];
 
   const graphIds = getCachedGraphIds();
 
   graphIds.forEach((id) => {
-    const cachedGraph = window.localStorage.getItem(`${PIPEM.cache}${id}`);
-    try {
-      const graphObj = JSON.parse(cachedGraph);
+    const graphObj = getCachedGraph(id);
+    if (graphObj) {
       graphs.push(graphObj);
-    } catch(e) {
-      console.error(`Could not retrieve graph ID ${id} from localStorage. ${e}`);
     }
   });
 
   return graphs;
-}
-
-export const getCachedGraph = (graphid) => {
-  const cachedGraph = localStorage.getItem(`${PIPEM.cache}${graphid}`);
-  if (cachedGraph) {
-    try {
-      const graphData = JSON.parse(cachedGraph);
-      return graphData;
-    } catch(e) {
-      console.error(`Could not parse localStorage. ID: ${graphid}. Data: ${cachedGraph}`);
-    }
-  }
-  return {};
 }
 
 export const setCacheGraphIds = (graphIds) => {
@@ -85,6 +80,7 @@ export const setCacheGraphIds = (graphIds) => {
 }
 
 export const addCacheGraphId = (graphid) => {
+  if (getCachedGraph(graphid)) return;
   const graphIds = getCachedGraphIds();
   graphIds.push(graphid);
   setCacheGraphIds(graphIds);

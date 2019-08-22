@@ -56,7 +56,7 @@
       <DeploymentInfo v-model="deploymentInfo"/>
     </v-flex> -->
     <v-layout class="fixed" v-if="tabValue !== 'tab-0'">
-      <v-flex xs10 offset-xs1 v-for="abi in pipeabi">
+      <v-flex xs10 offset-xs1 v-for="(abi, i) in pipeabi" :key="i">
         <AbiFunction :abi="abi" @input="onInput" @change="onChange"/>
       </v-flex>
     </v-layout>
@@ -154,7 +154,7 @@ export default {
     async setData() {
       this.qrcodeValue = window.location.origin + "/#/" + this.graphid;
 
-      const {graph, pfunctions} = getCachedGraph(this.graphid);
+      const {graph, pfunctions} = getCachedGraph(this.graphid) || {};
       this.graph = graph;
       this.pfunctions = pfunctions;
 
