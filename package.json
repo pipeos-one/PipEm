@@ -9,13 +9,13 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.1",
-    "@pipeos/pipecanvas": "file:../pipeline/packages/packages/pipecanvas",
     "axios": "^0.19.0",
     "ethers": "^4.0.33",
     "marked": "^0.7.0",
+    "@pipeos/pipecanvas": "0.0.1",
     "roboto-fontface": "*",
     "vue": "^2.6.10",
-    "vue-ethabi": "0.0.1",
+    "vue-ethabi": "0.0.2",
     "vue-qr-reader": "^1.6.0",
     "vue-router": "^3.0.3",
     "vuetify": "^2.0.7"
