@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.1",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "ethers": "^4.0.33",
     "marked": "^0.7.0",
     "@pipeos/pipecanvas": "0.0.1",
